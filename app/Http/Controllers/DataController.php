@@ -44,4 +44,23 @@ class DataController extends Controller
 
         return self::Response(true, 'Success', 200, $experience);
     }
+
+    public function GetContactsData()
+{
+    $contacts = \App\Models\Contact::all();
+    return response()->json(['data' => $contacts]);
+}
+
+    public function GetTechnologiesData()
+    {
+        // Используем DB::table, чтобы гарантированно сработало, даже если модели нет
+        $technologies = \Illuminate\Support\Facades\DB::table('technologies')->get();
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'Success',
+            'data' => $technologies
+        ]);
+    }
+
 }
